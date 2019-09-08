@@ -32,8 +32,11 @@ for i in range(2):
     tm[i].states = [int(p) for p in tm[i].states]
     tm[i].states.sort()
     tm[i].initial_state = lines[4]
+    tm[i].initial_state = [int(p) for p in tm[i].initial_state]
     tm[i].final_states = lines[5].split()
+    tm[i].final_states = [int(p) for p in tm[i].final_states]
     tm[i].number_of_tapes = lines[6]
+    tm[i].number_of_tapes = [int(p) for p in tm[i].number_of_tapes]
     for j in range(7, len(lines)):
         tm[i].transitions.append(lines[j].split())
 
@@ -93,44 +96,31 @@ tam_final = len(tm[0].states) + len(tm[1].states) + 1
 for i in range(tam_final):
     tm[2].states.append(i)
 
-# linha 5
 
-# matriz_ref_states = [[], []]
-
-# states = 1
-# for i in range(2):
-#     var = len(tm[i].states)
-#     for j in range(var):
-#         matriz_ref_states[i].append(states)
-#         states += 1
-
-
-# matriz_ref_init = [[], []]
-
-# tm[2].initial_state.append(0)
-# for i in range(2):
-#     matriz_ref_init[i].append(tm[i].initial_state[0])
-
-
-# matriz_ref_final = [[], []]
-
-# for i in range(2):
-#     var2 = len(tm[i].final_states)
-#     for j in range(var2):
-#         matriz_ref_final[i].append(tm[i].final_states[j])
-
-# # for j in range(2):
-# #     for i in range(len(matriz_ref_final[0] + len(matriz_ref_final[1]))):
-# #         tm[2].final_states.append(matriz_ref_states[j][i])
-
+# estado inicial
 tm[2].initial_state.append('0')
 
-ref_tm1 = []
+ref_states = [[], []]
 
+
+# referencia de estados
+for i in range(len(tm[0].states)):
+    ref_states[0].append(i+1)
+
+for i in range(len(tm[1].states)):
+    ref_states[1].append(len(tm[0].states) + 1 + i)
+
+# define estado final
+for i in range(2):
+    for j in range(len(tm[i].final_states)):
+        tm[2].final_states.append(
+            ref_states[i][tm[i].final_states[j]])
+
+# define n de fitas
+
+tm[2].number_of_tapes.append(tm[0].number_of_tapes[0])
+
+######################################
 
 for i in range(3):
     printTmData(tm[i], i)
-
-# print(matriz_ref_states)
-# print(matriz_ref_init)
-# print(matriz_ref_final)
