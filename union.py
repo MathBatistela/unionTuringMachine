@@ -15,13 +15,12 @@ class TuringMachine(object):
 
 
 tm = []
-fp = []
 
 for i in range(2):
     tm.append(TuringMachine())
-    fp.append(open(sys.argv[i+1], "r"))
-    lines_cmd = fp[i].readlines()
-    fp[i].close()
+    fp = open(sys.argv[i+1], "r")
+    lines_cmd = fp.readlines()
+    fp.close()
     lines = []
     for line in lines_cmd:
         lines.append(line.rstrip())
@@ -99,7 +98,7 @@ for i in range(tam_final):
 
 
 # estado inicial
-tm[2].initial_state.append('0')
+tm[2].initial_state.append(0)
 
 ref_states = [[], []]
 
@@ -125,10 +124,10 @@ tm[2].number_of_tapes.append(tm[0].number_of_tapes[0])
 
 
 for j in range(2):
-    for i in range(len(tm[2].input_alphabet)):
+    for i in range(len(tm[j].input_alphabet)):
         tm[2].transitions.append(
-            ("0 " + str(ref_states[j][tm[j].initial_state[0]]) + " " + tm[2].input_alphabet[i] + " " +
-                tm[2].input_alphabet[i] + " S").split())
+            ("0 " + str(ref_states[j][tm[j].initial_state[0]]) + " " + tm[j].input_alphabet[i] + " " +
+                tm[2].input_alphabet[j] + " S").split())
 
 for j in range(2):
     for i in range(len(tm[j].transitions)):
@@ -148,5 +147,4 @@ for j in range(2):
 
 #######################################
 
-for i in range(3):
-    printTmData(tm[i], i)
+printTmData(tm[2], 2)
