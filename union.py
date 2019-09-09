@@ -3,6 +3,7 @@ import sys
 
 class TuringMachine(object):
     def __init__(self):
+        self.machine = "TM"
         self.input_alphabet = []
         self.tape_alphabet = []
         self.whitespace = []
@@ -56,7 +57,6 @@ def printTmData(tm_aux, i):
     print()
 
 
-# if tm[0].number_of_tapes != tm[1].number_of_tapes:
 tm.append(TuringMachine())
 
 # Função 2a linha
@@ -83,9 +83,10 @@ for i in range(len(tm[1].tape_alphabet)):
 # Função linha4
 letter = 65
 for i in range(26):
-    if chr(letter) not in tm[2].tape_alphabet:
-        tm[2].whitespace.append(chr(letter))
-        break
+    if chr(letter) != 'R' or chr(letter) != 'L' or chr(letter) != 'S':
+        if chr(letter) not in tm[2].tape_alphabet:
+            tm[2].whitespace.append(chr(letter))
+            break
     letter += 1
 
 #######################################################
@@ -121,6 +122,31 @@ for i in range(2):
 tm[2].number_of_tapes.append(tm[0].number_of_tapes[0])
 
 ######################################
+
+
+for j in range(2):
+    for i in range(len(tm[2].input_alphabet)):
+        tm[2].transitions.append(
+            ("0 " + str(ref_states[j][tm[j].initial_state[0]]) + " " + tm[2].input_alphabet[i] + " " +
+                tm[2].input_alphabet[i] + " S").split())
+
+for j in range(2):
+    for i in range(len(tm[j].transitions)):
+
+        (tm[j].transitions[i])[0] = str(ref_states[j][int(
+            (tm[j].transitions[i])[0], 10)])
+
+        (tm[j].transitions[i])[1] = str(ref_states[j][int(
+            (tm[j].transitions[i])[1], 10)])
+
+        for k in range(2, len(tm[j].transitions[i])):
+            if (tm[j].transitions[i])[k] == tm[j].whitespace[0]:
+                (tm[j].transitions[i])[k] = tm[2].whitespace[0]
+
+        tm[2].transitions.append(tm[j].transitions[i])
+
+
+#######################################
 
 for i in range(3):
     printTmData(tm[i], i)
