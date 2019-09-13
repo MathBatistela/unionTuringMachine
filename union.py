@@ -1,6 +1,6 @@
 import sys
 
-
+# Classe com todas as linhas de uma turing machine.
 class TuringMachine(object):
     def __init__(self):
         self.machine = "TM"
@@ -16,6 +16,7 @@ class TuringMachine(object):
 
 tm = []
 
+# Todas as linhas da Turing Machine são pegas pelos variaveis da Classe
 for i in range(2):
     tm.append(TuringMachine())
     fp = open(sys.argv[i+1], "r")
@@ -58,7 +59,8 @@ def printTmData(tm_aux, i):
 
 tm.append(TuringMachine())
 
-# Função 2a linha
+""" Capituramos para Turing Machine União todos os alfabetos de entrada da 1a turing machine
+        e na 2a turing machine são capturadas, apenas, as letras que não continha na 1a (2a linha) """
 for j in range(len(tm[0].input_alphabet)):
     tm[2].input_alphabet.append(tm[0].input_alphabet[j])
 
@@ -68,7 +70,8 @@ for i in range(len(tm[1].input_alphabet)):
         tm[2].input_alphabet.append(tm[1].input_alphabet[i])
 #######################################################
 
-# Função 3a linha
+""" Capituramos para a Turing Machine União todos os alfabeto da fita da 1a turing machine
+        e na 2a pegamos, apenas, as letras que não continha na 1a (3a linha) """
 for j in range(len(tm[0].tape_alphabet)):
     tm[2].tape_alphabet.append(tm[0].tape_alphabet[j])
 
@@ -79,7 +82,8 @@ for i in range(len(tm[1].tape_alphabet)):
 
 #######################################################
 
-# Função linha4
+""" Procuramos na Turing Machine União, a partir da letra "A" uma letra não que não estivesse
+        no alfabeto da fita e que fosse diferente de "R", "L" ou "S" (4a linha) """
 letter = 65
 for i in range(26):
     if chr(letter) != 'R' or chr(letter) != 'L' or chr(letter) != 'S':
@@ -90,45 +94,58 @@ for i in range(26):
 
 #######################################################
 
-# Define estados
+""" Criamos a quantidade de estados existens na Turing Machine União
+        somando a quantidade de estados da 1a e 2a TM + 1, que é o nosso estado inicial (5a linha) """
 tam_final = len(tm[0].states) + len(tm[1].states) + 1
 
 for i in range(tam_final):
     tm[2].states.append(i)
+#######################################################
 
-
-# estado inicial
+""" Definindo o estado inicial da TM União sempre como 0, que é o estado criado a mais
+        que serve como controle (6a linha) """
 tm[2].initial_state.append(0)
+#######################################################
 
 ref_states = [[], []]
 
 
-# referencia de estados
+""" É criado uma matriz 2x(tamanho de estados de cada TM) para que fosse possível saber
+        qual a referência de um estado da TM 1 e 2 na TM união"""
 for i in range(len(tm[0].states)):
     ref_states[0].append(i+1)
 
 for i in range(len(tm[1].states)):
     ref_states[1].append(len(tm[0].states) + 1 + i)
+#######################################################
 
-# define estado final
+""" Definimos a os estados finas da TM União, pegando os estados finais da TM 1 e 2
+        já com a referencia deles na nova TM (7a linha) """
 for i in range(2):
     for j in range(len(tm[i].final_states)):
         tm[2].final_states.append(
             ref_states[i][tm[i].final_states[j]])
+#######################################################
 
-# define n de fitas
-
+""" Define a quantidade de fitas que haverá na TM União, sabendo que 
+        a quantidade de fintas na TM 1 e 2 são iguais (8a linha) """
 tm[2].number_of_tapes.append(tm[0].number_of_tapes[0])
 
-######################################
+#######################################################
 
-
+""" É criado asa transições inicias da TM União que define a qual máquina o conjunto de 
+        entrada pertence, de acordo com a primeira letra é possível mandar para o estado
+            inicias da TM 1 ou 2 ou as duas simultaneamente sem que nada seja consumido (9a linha) """
 for j in range(2):
     for i in range(len(tm[j].input_alphabet)):
         tm[2].transitions.append(
             ("0 " + str(ref_states[j][tm[j].initial_state[0]]) + " " + tm[j].input_alphabet[i] + " " +
                 tm[2].input_alphabet[j] + " S").split())
+#######################################################
 
+""" É copiado todas as transações da TM 1 e 2, fazendo as trocas dos estados para as suas respectivas referências
+        na TM União, e também, trocando as letras que representavam o "Branco" de cada TM 
+            para a letra definida como "Branco" na TM União (9a linha) """
 for j in range(2):
     for i in range(len(tm[j].transitions)):
 
@@ -145,6 +162,6 @@ for j in range(2):
         tm[2].transitions.append(tm[j].transitions[i])
 
 
-#######################################
+#######################################################
 
 printTmData(tm[2], 2)
