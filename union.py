@@ -167,7 +167,7 @@ for j in range(2):
 # printTmData(tm[2], 2)
 
 """ Aberto o arquivo vindo por comando, na pasta ."/fla/turing_machine_union.txt" e escreve a união das duas TM """
-union = open("./fla/" + sys.argv[3], 'w')
+union = open(sys.argv[3], 'w')
 union.write("T M\n")
 for i in range(len(tm[2].input_alphabet)):
     union.write(tm[2].input_alphabet[i] + " ")
@@ -194,4 +194,10 @@ for i in range(len(tm[2].transitions)):
     for j in range(len(tm[2].transitions[i])):
         union.write(str(tm[2].transitions[i][j]) + " ")
     union.write("\n")
+
+union.close()
 #######################################################
+
+""" Verifica se máquina de Turing aceita """
+import subprocess
+return_code = subprocess.call('python3 ./fla/main.py union.txt abb', shell=True)
