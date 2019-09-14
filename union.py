@@ -1,6 +1,6 @@
 import sys
 
-# Classe com todas as linhas de uma turing machine.
+""" Classe com todas as linhas de uma turing machine. """
 class TuringMachine(object):
     def __init__(self):
         self.machine = "TM"
@@ -16,7 +16,7 @@ class TuringMachine(object):
 
 tm = []
 
-# Todas as linhas da Turing Machine são pegas pelos variaveis da Classe
+""" Todas as linhas da Turing Machine são pegas pelos variaveis da Classe """
 for i in range(2):
     tm.append(TuringMachine())
     fp = open(sys.argv[i+1], "r")
@@ -166,7 +166,8 @@ for j in range(2):
 
 # printTmData(tm[2], 2)
 
-union = open('union.txt', 'w')
+""" Aberto o arquivo "union.txt" onde é escrito a união das duas TM """
+union = open(sys.argv[3], 'w')
 union.write("TM\n")
 for i in range(len(tm[2].input_alphabet)):
     union.write(tm[2].input_alphabet[i] + " ")

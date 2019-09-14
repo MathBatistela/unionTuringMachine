@@ -1,0 +1,33 @@
+T M
+C X a b c y
+B C X a b c y
+B
+
+""
+
+1
+0 0 b b R
+0 1 a a R
+0 2 B B L
+1 0 a c R
+1 0 b b R
+1 2 B B L
+11 6 y C L
+2 10 B B R
+2 2 C c L
+2 2 a a L
+2 2 b b L
+2 3 c X R
+3 3 c c R
+3 3 b b R
+3 3 a a R
+3 4 B y L
+4 11 c y R
+4 5 a y R
+4 7 b y R
+4 9 X y R
+5 6 y a L
+6 4 y y L
+7 6 y b L
+8 0 y C R
+9 8 y a L
