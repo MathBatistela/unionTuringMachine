@@ -164,4 +164,32 @@ for j in range(2):
 
 #######################################################
 
-printTmData(tm[2], 2)
+# printTmData(tm[2], 2)
+
+union = open('union.txt', 'w')
+union.write("TM\n")
+for i in range(len(tm[2].input_alphabet)):
+    union.write(tm[2].input_alphabet[i] + " ")
+union.write("\n")
+for i in range(len(tm[2].tape_alphabet)):
+    union.write(tm[2].tape_alphabet[i] + " ")
+union.write("\n")
+for i in range(len(tm[2].whitespace)):
+    union.write(tm[2].whitespace[i] + " ")
+union.write("\n")
+for i in range(len(tm[2].states)):
+    union.write(str(tm[2].states[i]) + " ")
+union.write("\n")
+for i in range(len(tm[2].initial_state)):
+    union.write(str(tm[2].initial_state[i]) + " ")
+union.write("\n")
+for i in range(len(tm[2].final_states)):
+    union.write(str(tm[2].final_states[i]) + " ")
+union.write("\n")
+for i in range(len(tm[2].number_of_tapes)):
+    union.write(str(tm[2].number_of_tapes[i]) + " ")
+union.write("\n")
+for i in range(len(tm[2].transitions)):
+    for j in range(len(tm[2].transitions[i])):
+        union.write(str(tm[2].transitions[i][j]) + " ")
+    union.write("\n")
