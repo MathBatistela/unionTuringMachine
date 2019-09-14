@@ -1,0 +1,27 @@
+T M
+a b # 
+B a b # 
+A 
+0 1 2 3 4 5 6 7 8 
+0 
+2 5 
+1 
+0 1 a a S 
+0 1 b a S 
+0 3 # b S 
+0 3 a b S 
+1 1 a b R 
+1 2 A A S 
+3 3 # # R 
+3 4 a # R 
+4 4 # # R 
+4 5 A A L 
+4 6 a a R 
+6 6 # # R 
+6 7 a # R 
+6 8 A A L 
+7 6 a a R 
+7 7 # # R 
+8 3 A A R 
+8 8 # # L 
+8 8 a a L 

@@ -1,4 +1,5 @@
 import sys
+import subprocess
 
 """ Classe com todas as linhas de uma turing machine. """
 class TuringMachine(object):
@@ -199,5 +200,7 @@ union.close()
 #######################################################
 
 """ Verifica se máquina de Turing aceita """
-import subprocess
-return_code = subprocess.call('python3 ./fla/main.py union.txt abb', shell=True)
+inputTest = ""
+for i in range(len(sys.argv[4:])):
+    inputTest = inputTest + sys.argv[4:][i]
+return_code = subprocess.call('python3 ./fla/main.py union.txt '+ inputTest, shell=True)
