@@ -166,7 +166,7 @@ for j in range(2):
 
 # printTmData(tm[2], 2)
 
-""" Aberto o arquivo "union.txt" onde é escrito a união das duas TM """
+""" Aberto o arquivo vindo por comando onde é escrito a união das duas TM """
 union = open(sys.argv[3], 'w')
 union.write("TM\n")
 for i in range(len(tm[2].input_alphabet)):
