@@ -1,5 +1,5 @@
 import sys
-import subprocess
+import subprocess """ Fazer chamadas no shell dentro do código """
 
 """ Classe com todas as linhas de uma turing machine. """
 class TuringMachine(object):
